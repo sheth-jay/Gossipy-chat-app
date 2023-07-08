@@ -13,7 +13,7 @@ import "./styles.css";
 import ScrollableChat from './ScrollableChat';
 import animationData from '../animations/typing.json';
 
-const END_POINT = "http://localhost:5000";
+const END_POINT = "https://gossipy-xft2.onrender.com";
 let socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
