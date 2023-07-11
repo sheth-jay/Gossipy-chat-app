@@ -4,55 +4,64 @@ const generateToken = require("../config.js/generateToken");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, pic } = req.body;
-  if (!name || !email || !password) {
-    res.status(400);
-    throw new Error("Please Enter details for all the fields");
-  }
-
-  const userExists = await User.findOne({ email });
-  if (userExists) {
-    res.status(400);
-    throw new Error("User already exists");
-  }
-
-  const user = await User.create({
-    name,
-    email,
-    password,
-    pic,
-  });
-  console.log(">>>user, user);
-  if (user) {
-    return res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      pic: user.pic,
-      token: generateToken(user._id),
-    })
-  } else {
-    throw new Error("Failed to create the User");
+  try {
+    if (!name || !email || !password) {
+      res.status(400);
+      throw new Error("Please Enter details for all the fields");
+    }
+    
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      res.status(400);
+      throw new Error("User already exists");
+    }
+  
+    const user = await User.create({
+      name,
+      email,
+      password,
+      pic,
+    });
+    if (user) {
+      return res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        pic: user.pic,
+        token: generateToken(user._id),
+      })
+    } else {
+      throw new Error("Failed to create the User");
+    }
+  } catch (err) {
+    res.json({ err });
+   throw new Error("Something went wrong", error);
   }
 });
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
-  if(!user) {
-    return res.status(400).json({ message: "User not found" });
-  }
-  console.log(">>>user, user);
-  if (user && (await user.matchPassword(password))) {
-    return res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      pic: user.pic,
-      token: generateToken(user._id),
-    })
-  } else {
-    res.status(401);
-    throw new Error("User email or password is incorrect");
+  try {
+    const user = await User.findOne({ email });
+    if(!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+    console.log(">>>user, user);
+    if (user && (await user.matchPassword(password))) {
+      return res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        pic: user.pic,
+        token: generateToken(user._id),
+      })
+    } else {
+      res.status(401);
+      throw new Error("User email or password is incorrect");
+    }
+  } catch (err) {
+    res.json({ err });
+   throw new Error("Something went wrong", error);
   }
 });
 
