@@ -19,6 +19,22 @@ app.use(express.json()); // to accept json data
 //   res.send("API is running");
 // });
 
+app.use(function (req, res, next) {
+  if (req.headers["access-control-request-private-network"]) {
+    res.header("Access-Control-Allow-Private-Network", "true");
+  }
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Credentials", "true");
+
+ 
+
+  next();
+});
+
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
