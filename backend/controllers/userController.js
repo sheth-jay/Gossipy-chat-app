@@ -21,7 +21,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
     pic,
   });
-
+  console.log(">>>user, user);
   if (user) {
     res.status(201).json({
       _id: user._id,
@@ -38,6 +38,9 @@ const registerUser = asyncHandler(async (req, res) => {
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
+  if(!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
   console.log(">>>user, user);
   if (user && (await user.matchPassword(password))) {
     res.json({
