@@ -23,7 +23,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
   console.log(">>>user, user);
   if (user) {
-    res.status(201).json({
+    return res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
@@ -43,7 +43,7 @@ const authUser = asyncHandler(async (req, res) => {
   }
   console.log(">>>user, user);
   if (user && (await user.matchPassword(password))) {
-    res.json({
+    return res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
@@ -66,7 +66,7 @@ const allUsers = asyncHandler(async (req, res) => {
   } : {};
 
   const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
-  res.send(users);
+  return res.send(users);
 });
 
 module.exports = { registerUser, authUser, allUsers };
