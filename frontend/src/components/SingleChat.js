@@ -13,7 +13,7 @@ import "./styles.css";
 import ScrollableChat from './ScrollableChat';
 import animationData from '../animations/typing.json';
 
-const END_POINT = "https://gossipy-xft2.onrender.com";
+const END_POINT = "https://gossipy-api.onrender.com";
 let socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -53,7 +53,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       };
 
       setLoading(true);
-      const { data } = await axios.get(`/api/message/${selectedChat._id}`, config);
+      const { data } = await axios.get(`https://gossipy-api.onrender.com/api/message/${selectedChat._id}`, config);
 
       setMessages(data);
       setLoading(false);
@@ -84,14 +84,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
         setNewMessage("");
         const { data } = await axios.post(
-          "/api/message",
+          "https://gossipy-api.onrender.com/api/message",
           {
             content: newMessage,
             chatId: selectedChat._id,
           },
           config,
         );
-        console.log('>>>', data);
 
         socket.emit("new message", data);
         setMessages([...messages, data]);

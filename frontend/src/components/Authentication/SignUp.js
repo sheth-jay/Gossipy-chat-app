@@ -93,7 +93,7 @@ const SignUp = () => {
         }
       };
       const { data } = await axios.post(
-        "/api/user",
+        "https://gossipy-api.onrender.com/api/user",
         {
           name,
           email,

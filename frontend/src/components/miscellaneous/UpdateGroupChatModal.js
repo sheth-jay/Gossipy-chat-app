@@ -54,7 +54,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
       };
 
       const { data } = axios.put(
-        "/api/chat/groupremove",
+        "https://gossipy-api.onrender.com/api/chat/groupremove",
         {
           chatId: selectedChat._id,
           userId: userToRemove._id
@@ -90,7 +90,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
         }
       }
 
-      const { data } = await axios.put('/api/chat/rename',
+      const { data } = await axios.put('https://gossipy-api.onrender.com/api/chat/rename',
         {
           chatId: selectedChat._id,
           chatName: groupChatName,
@@ -136,7 +136,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
         },
       };
 
-      const { data } = await axios.get(`/api/user?search=${query}`, config);
+      const { data } = await axios.get(`https://gossipy-api.onrender.com/api/user?search=${query}`, config);
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -183,7 +183,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
       };
 
       const { data } = axios.put(
-        "/api/chat/groupadd",
+        "https://gossipy-api.onrender.com/api/chat/groupadd",
         {
           chatId: selectedChat._id,
           userId: userToAdd._id

@@ -46,7 +46,7 @@ const GroupChatModal = ({ children }) => {
         },
       };
 
-      const { data } = await axios.get(`/api/user?search=${query}`, config);
+      const { data } = await axios.get(`https://gossipy-api.onrender.com/api/user?search=${query}`, config);
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -79,7 +79,7 @@ const GroupChatModal = ({ children }) => {
         },
       };
 
-      const { data } = await axios.post("/api/chat/group",
+      const { data } = await axios.post("https://gossipy-api.onrender.com/api/chat/group",
         {
           name: groupChatName,
           users: JSON.stringify(selectedUsers.map(user => user._id)),
