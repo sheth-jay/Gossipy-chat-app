@@ -46,7 +46,6 @@ const authUser = asyncHandler(async (req, res) => {
     if(!user) {
       return res.status(400).json({ message: "User not found" });
     }
-    console.log(">>>user, user);
     if (user && (await user.matchPassword(password))) {
       return res.json({
         _id: user._id,
