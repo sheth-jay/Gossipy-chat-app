@@ -71,7 +71,7 @@ const Login = () => {
 
   return (
     <VStack spacing="5px">
-      <FormControl id='email' isRequired>
+      <FormControl id='login-email' isRequired>
         <FormLabel>
           Email
         </FormLabel>
@@ -81,7 +81,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
-      <FormControl id='password' isRequired>
+      <FormControl id='login-password' isRequired>
         <FormLabel>
           Password
         </FormLabel>
