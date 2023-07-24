@@ -37,6 +37,8 @@ MONGO_URL=<your_mongodb_connection_string>
 JWT_SECRET=<your_random_string>
 ```
 
+5. Replace `https://gossipy-xft2.onrender.com` with `http://localhost:5000` local API URL.
+
 Replace `<your_mongodb_connection_string>` with the MongoDB connection string, and `<your_random_string>` with any random string of your choice.
 
 ## Backend Setup
